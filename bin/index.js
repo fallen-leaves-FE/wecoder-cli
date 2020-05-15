@@ -22,6 +22,10 @@ const questions = [
             {
                 name: 'koa && ejs服务端渲染模板',
                 value: '2'
+            },
+            {
+                name: '基于webpack的typescript学习模板',
+                value: '3'
             }
         ]
     }
@@ -43,10 +47,16 @@ program.version(version, '-v, --version')
                 		spinner.succeed()
                         console.log(symbols.success, chalk.green('项目已创建\n'))
                         console.log(`cd ./${name}\n`)
-                        if (+choose.template === 1) {
-                            console.log(' npm install\n &&\n npm start')
-                        } else if (+choose.template === 2) {
-                            console.log(' npm install\n &&\n npm run dev\n &&\n npm run server')
+                        switch (+choose.template) {
+                            case 1:
+                                console.log(' npm install\n &&\n npm start')
+                                break
+                            case 2:
+                                console.log(' npm install\n &&\n npm run dev\n &&\n npm run server')
+                                break
+                            case 3:
+                                console.log(' npm install\n &&\n npm start')
+                                break
                         }
                       }
                   })
