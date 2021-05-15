@@ -1,9 +1,9 @@
 const fs = require('fs')
 const handlebars = require('handlebars')
 module.exports = (answers) => {
-  const fileName = `${answers.name}/package.json`; // 这里可以指定你需要的路径
+  const fileName = `${answers.projectName}/package.json`; // 这里可以指定你需要的路径
   const meta = {
-      name: answers.name,
+      name: answers.projectName,
       description: answers.description,
       author: answers.author,
       version: answers.version
