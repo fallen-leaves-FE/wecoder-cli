@@ -22,7 +22,7 @@ program.version(version, '-v, --version')
                     message: '项目名称',
                     default: name,
                     validate (val) {
-                        if ((/[\w-]/g).test(val)) {
+                        if ((/^[a-zA-Z][a-zA-Z0-9_-]*$/g).test(val)) {
                             return true
                         }
                         return '请输入项目名称，例如：react-ts-project'
@@ -68,6 +68,21 @@ program.version(version, '-v, --version')
                             value: '4'
                         }
                     ]
+                },
+                {
+                    type: 'input',
+                    name: 'basename',
+                    message: '路由basename',
+                    default: 'react-app',
+                    when (answers) {
+                        return +answers.template === 1
+                    },
+                    validate (val) {
+                        if ((/^[a-zA-Z][a-zA-Z0-9_-]*$/g).test(val)) {
+                            return true
+                        }
+                        return '请正确格式的basename，例如：react-app'
+                    }
                 },
                 {
                     type: 'list',

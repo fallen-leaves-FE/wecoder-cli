@@ -14,11 +14,7 @@ const installMethod = (path, command) => {
       }
     })
     install.on('exit', (code) => {
-      if (+code === 0) {
-        resolve()
-      } else {
-        reject('错误码：' + code)
-      }
+      resolve()
     })
   })
 }
