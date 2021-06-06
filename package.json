@@ -1,6 +1,6 @@
 {
   "name": "wecoder-cli",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "A scaffold for downloading template files",
   "main": "index.js",
   "bin": {
