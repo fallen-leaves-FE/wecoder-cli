@@ -1,27 +1,28 @@
 #! /usr/bin/env node
-const program = require('commander')
-const download = require('download-git-repo')
-const ora = require('ora')
-const chalk = require('chalk')
-const symbols = require('log-symbols')
-const inquirer = require('inquirer')
-const version = require('../package.json').version
-const templateMaps = require('../template.json')
-const handlebars = require('./handlebars')
-const install = require('./install')
+import { program } from 'commander'
+import download from 'download-git-repo'
+import ora from 'ora'
+import chalk from 'chalk'
+import symbols from 'log-symbols'
+import inquirer from 'inquirer'
+import templateMaps from '../template.js'
+import handlebars from './handlebars.js'
+import install from './install.js'
+
+const version = '2.0.0'
 const spinner = ora('正在下载模板...')
 
 program.version(version, '-v, --version')
-       .command('init [name]')
-       .action((name) => {
-            inquirer
+    .command('init [name]')
+    .action((name) => {
+        inquirer
             .prompt([
                 {
                     type: 'input',
                     name: 'projectName',
                     message: '项目名称',
                     default: name,
-                    validate (val) {
+                    validate(val) {
                         if ((/^[a-zA-Z][a-zA-Z0-9_-]*$/g).test(val)) {
                             return true
                         }
@@ -52,7 +53,7 @@ program.version(version, '-v, --version')
                     message: '请选择模板',
                     choices: [
                         {
-                            name: 'react项目模板',
+                            name: 'react-admin-template项目模板',
                             value: '1'
                         },
                         {
@@ -64,25 +65,10 @@ program.version(version, '-v, --version')
                             value: '3'
                         },
                         {
-                            name: '基于rollup的vue3.0组件库模板',
+                            name: '基于esbuild的vue3.0组件库模板',
                             value: '4'
                         }
                     ]
-                },
-                {
-                    type: 'input',
-                    name: 'basename',
-                    message: '路由basename',
-                    default: 'react-app',
-                    when (answers) {
-                        return +answers.template === 1
-                    },
-                    validate (val) {
-                        if ((/^[a-zA-Z][a-zA-Z0-9_-]*$/g).test(val)) {
-                            return true
-                        }
-                        return '请正确格式的basename，例如：react-app'
-                    }
                 },
                 {
                     type: 'list',
@@ -110,32 +96,32 @@ program.version(version, '-v, --version')
                 }
             ])
             .then(answers => {
-                  spinner.start()
-                  download(templateMaps[answers.template], answers.projectName, {clone: true},(err) => {
-                      if(err){
+                spinner.start()
+                download(templateMaps[answers.template], answers.projectName, { clone: true }, (err) => {
+                    if (err) {
                         spinner.fail()
                         console.log(symbols.error, chalk.red('项目创建失败'))
                         console.log(symbols.error, chalk.red(err))
-                      }else{
+                    } else {
                         handlebars(answers)
                         spinner.text = '模版下载成功'
                         if (answers.installName) {
                             spinner.text = '安装依赖中...'
                             install(`${answers.projectName}`, `${answers.installName}`)
-                            .then(() => {
-                                spinner.succeed()
-                                console.log(symbols.success, chalk.green('项目初始化成功'))
-                            }).catch(err => {
-                                spinner.fail()
-                                console.log(symbols.error, chalk.red('依赖安装失败，请手动执行安装命令！'))
-                                console.log(symbols.error, chalk.red(err))
-                            })
+                                .then(() => {
+                                    spinner.succeed()
+                                    console.log(symbols.success, chalk.green('项目初始化成功'))
+                                }).catch(err => {
+                                    spinner.fail()
+                                    console.log(symbols.error, chalk.red('依赖安装失败，请手动执行安装命令！'))
+                                    console.log(symbols.error, chalk.red(err))
+                                })
                         } else {
                             spinner.succeed()
                             console.log(symbols.success, chalk.green('模版下载成功，请手动安装依赖'))
                         }
-                      }
-                  })
+                    }
+                })
             })
-       })
+    })
 program.parse(process.argv)

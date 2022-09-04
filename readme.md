@@ -12,7 +12,7 @@
 
 ## 模板类型
 
--	1.基于ts和webpack的一个react项目模板
+-	1.react-admin-template项目模板
 -	2.基于koa和ejs的一个服务端渲染模板
 -	3.webpack+typescript的一个demo模板
--	4.基于rollup+esbuild+ts的一个vue3.0组件库开发模板
+-	4.基于esbuild的vue3.0组件库模板

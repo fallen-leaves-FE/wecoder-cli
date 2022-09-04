@@ -1,4 +1,4 @@
-const exec = require('child_process').exec
+import { exec } from 'child_process'
 
 const installMethod = (path, command) => {
   return new Promise((resolve, reject) => {
@@ -18,4 +18,4 @@ const installMethod = (path, command) => {
     })
   })
 }
-module.exports = installMethod
+export default installMethod

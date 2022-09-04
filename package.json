@@ -1,11 +1,12 @@
 {
   "name": "wecoder-cli",
-  "version": "1.2.5",
+  "version": "2.0.0",
   "description": "A scaffold for downloading template files",
   "main": "index.js",
   "bin": {
     "wecoder": "./bin/index.js"
   },
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,7 +15,8 @@
     "wecoder-cli",
     "esbuild",
     "vue3.0",
-    "rollup"
+    "Vite",
+    "React"
   ],
   "author": "fallen_leaves",
   "repository": {
@@ -22,12 +24,12 @@
   },
   "license": "ISC",
   "dependencies": {
-    "chalk": "^4.0.0",
-    "commander": "^5.1.0",
+    "chalk": "^5.0.1",
+    "commander": "^9.4.0",
     "download-git-repo": "^3.0.2",
-    "handlebars": "^4.7.6",
-    "inquirer": "^7.1.0",
-    "log-symbols": "^4.0.0",
-    "ora": "^4.0.4"
+    "handlebars": "^4.7.7",
+    "inquirer": "^9.1.1",
+    "log-symbols": "^5.1.0",
+    "ora": "^6.1.2"
   }
 }
